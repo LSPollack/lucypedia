@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unparsed_html_body: MyString
+  publication_timestamp: MyString
+  headline: MyString
+  parsed_question: MyString
+  parsed_answer: MyString
+
+two:
+  unparsed_html_body: MyString
+  publication_timestamp: MyString
+  headline: MyString
+  parsed_question: MyString
+  parsed_answer: MyString

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hex_code: MyString
+  color_name: MyString
+
+two:
+  hex_code: MyString
+  color_name: MyString
