@@ -1,10 +1,10 @@
 namespace :search do
   desc "Uses the Search API to fetch UUIDs for Dear Lucy's in 2014"
 
-  task get_dl_uuids: :environment do
+  task get_dls: :environment do
 
     eds_key = ENV['FT_EDS_API_KEY']
-    max_search_results = 10
+    max_search_results = 4
 
     search_curl = %Q(curl -X POST --header "Content-Type:application/json" http://api.ft.com/content/search/v1\?apiKey\=#{eds_key} -d '{"queryString":"brand:=\\\"Dear Lucy\\\" AND initialPublishDateTime:>2014-01-01T00:00:00Z AND initialPublishDateTime:<2015-01-01T00:00:00Z", "resultContext" : { "maxResults": #{max_search_results},"offset": 0 } }')
 
@@ -18,11 +18,20 @@ namespace :search do
 
     apiUrls.each do |capi_url| 
       full_capi_url = "#{capi_url}?apiKey=#{eds_key}" 
+
       raw_response_content = HTTParty.get(full_capi_url)
+
       response_content_title = raw_response_content["item"]["title"]["title"]
+
       response_content_raw_html_bodycopy = raw_response_content["item"]["body"]["body"]
+
       response_content_raw_intialpubdatetime = raw_response_content["item"]["lifecycle"]["initialPublishDateTime"]
+      response_content_raw_intialpubdatetime_converted_to_date = DateTime.parse(response_content_raw_intialpubdatetime).to_date
+
       response_content_link_to_story = raw_response_content["item"]["location"]["uri"]
+
+      puts response_content_raw_intialpubdatetime_converted_to_date.to_s
+      puts response_content_raw_intialpubdatetime_converted_to_date.class
     end
 
   end
