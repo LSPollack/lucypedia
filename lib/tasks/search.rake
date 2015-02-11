@@ -15,9 +15,22 @@ namespace :search do
 
     content_api_url = "#{test_apiUrls}?apiKey=#{eds_key}"
 
-    response_content = HTTParty.get(content_api_url)
+    raw_response_content = HTTParty.get(content_api_url)
 
-    puts response_content
+    response_content_title = raw_response_content["item"]["title"]["title"]
+    puts response_content_title
+
+    response_content_raw_html_bodycopy = raw_response_content["item"]["body"]["body"]
+    puts response_content_raw_html_bodycopy
+
+    response_content_raw_intialpubdatetime = raw_response_content["item"]["lifecycle"]["initialPublishDateTime"]
+    puts response_content_raw_intialpubdatetime
+
+    response_content_link_to_story = raw_response_content["item"]["location"]["uri"]
+    puts response_content_link_to_story
+
+
+
 
   end
 
