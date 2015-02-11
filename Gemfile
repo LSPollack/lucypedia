@@ -8,6 +8,8 @@ group :development, :test do
   gem 'better_errors'
 end
 
+gem 'nokogiri', '1.6.6.2'
+
 gem 'httparty'
 gem 'json'
 

@@ -29,14 +29,19 @@ namespace :search do
 
       response_content_raw_html_bodycopy = raw_response_content["item"]["body"]["body"]
 
+      clean_raw_html = response_content_raw_html_bodycopy.gsub("\n","")
+
       response_content_raw_intialpubdatetime = raw_response_content["item"]["lifecycle"]["initialPublishDateTime"]
       response_content_raw_intialpubdatetime_converted_to_date = DateTime.parse(response_content_raw_intialpubdatetime).to_date
 
       response_content_link_to_story = raw_response_content["item"]["location"]["uri"]
 
-      Column.create!(unparsed_html_body: response_content_raw_html_bodycopy, headline: response_content_title, story_url: response_content_link_to_story, publication_timestamp: response_content_raw_intialpubdatetime_converted_to_date)
-      
+      Column.create!(unparsed_html_body: clean_raw_html, headline: response_content_title, story_url: response_content_link_to_story, publication_timestamp: response_content_raw_intialpubdatetime_converted_to_date)
+
     end
+
+    # Get rid of all the \n's
+    # Find the ----- and save down the question and answer separately
 
   end
 
