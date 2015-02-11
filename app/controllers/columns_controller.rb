@@ -9,5 +9,9 @@ class ColumnsController < ApplicationController
   end
 
   def index
+
   end
+
+  private
+
 end
