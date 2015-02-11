@@ -3,6 +3,10 @@ namespace :search do
 
   task get_dls: :environment do
 
+    # IMPORTANT
+    # !!Use this only if you want to wipe all the information in the database!!
+    Column.delete_all
+
     eds_key = ENV['FT_EDS_API_KEY']
     max_search_results = 4
 
@@ -14,7 +18,7 @@ namespace :search do
     
     # It appears that sometimes the SAPI returns nil (or at least it does when the result is parsed in this way). Would be worth investigating.
     apiUrls.compact!
-    puts apiUrls.count
+    puts apiUrls
 
     apiUrls.each do |capi_url| 
       full_capi_url = "#{capi_url}?apiKey=#{eds_key}" 
@@ -30,8 +34,8 @@ namespace :search do
 
       response_content_link_to_story = raw_response_content["item"]["location"]["uri"]
 
-      puts response_content_raw_intialpubdatetime_converted_to_date.to_s
-      puts response_content_raw_intialpubdatetime_converted_to_date.class
+      Column.create!(unparsed_html_body: response_content_raw_html_bodycopy, headline: response_content_title, story_url: response_content_link_to_story, publication_timestamp: response_content_raw_intialpubdatetime_converted_to_date)
+      
     end
 
   end
