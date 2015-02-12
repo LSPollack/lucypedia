@@ -5,12 +5,17 @@ namespace :search do
 
     # IMPORTANT
     # !!Use this only if you want to wipe all the information in the database!!
-    Column.delete_all
+    # Column.delete_all
+
+    ## TO USE
+    # Adjust the dates on the search_curl as needed (LINE 18)
+    # Swap the separator between the question and answer between a series of fullstops and a series of dashes, as needed. Generally, dashes have been used more recently and fullstops before that. Also a random selection of columns at various points have no separation at all and so these don't make it into the database. JOY! (LINE 46)
+    # Don't hate me cause the above two things are variables yet, I'm just so *ucking happy this is working at all right now and I'd like to do some more interesting things. Thank you.
 
     eds_key = ENV['FT_EDS_API_KEY']
-    max_search_results = 3
+    max_search_results = 100
 
-    search_curl = %Q(curl -X POST --header "Content-Type:application/json" http://api.ft.com/content/search/v1\?apiKey\=#{eds_key} -d '{"queryString":"brand:=\\\"Dear Lucy\\\" AND initialPublishDateTime:>2014-01-01T00:00:00Z AND initialPublishDateTime:<2015-01-01T00:00:00Z", "resultContext" : { "maxResults": #{max_search_results},"offset": 0 } }')
+    search_curl = %Q(curl -X POST --header "Content-Type:application/json" http://api.ft.com/content/search/v1\?apiKey\=#{eds_key} -d '{"queryString":"brand:=\\\"Dear Lucy\\\" AND initialPublishDateTime:>2011-01-01T00:00:00Z AND initialPublishDateTime:<2013-01-01T00:00:00Z", "resultContext" : { "maxResults": #{max_search_results},"offset": 0 } }')
 
     raw_json_response = `#{search_curl}`
 
@@ -18,6 +23,8 @@ namespace :search do
     
     # It appears that sometimes the SAPI returns nil (or at least it does when the result is parsed in this way). Would be worth investigating.
     apiUrls.compact!
+
+    puts apiUrls
 
     apiUrls.each do |capi_url| 
       # Iterates over the apiUrls retrieved using the SAPI and uses the CAPI to get the desired data for each column. Also does some formatting to clean the data retreived, namely: (1) Removes \n from bodycopy, (2) formats the string representing a publication date into a date
@@ -34,14 +41,18 @@ namespace :search do
 
       all_paragraphs_from_bodycopy = bodycopy_as_nokogiri_doc.css("p")
 
+      ## This is where the splitter is. I should put it in a variable at the top really.
       split_paragraph_index = all_paragraphs_from_bodycopy.to_a.index { |paragraph| 
-        paragraph.to_s =~ %r{\<p\>---------} 
+        paragraph.to_s =~ %r{\<p\>......................} 
       }
 
-      parsed_dl_question = all_paragraphs_from_bodycopy[0..(split_paragraph_index - 1)].to_s.gsub("\n","")
-      parsed_dl_answer = all_paragraphs_from_bodycopy[(split_paragraph_index + 1)..-1].to_s.gsub("\n","")
+      # This unless statement is here to catch the awful cases where the split_paragraph_index is nil because there is no bloody separator. Dammit.
+      unless split_paragraph_index == nil
+        parsed_dl_question = all_paragraphs_from_bodycopy[0..(split_paragraph_index - 1)].to_s.gsub("\n","")
+        parsed_dl_answer = all_paragraphs_from_bodycopy[(split_paragraph_index + 1)..-1].to_s.gsub("\n","")
 
-      Column.create!(unparsed_html_body: clean_raw_html, headline: response_content_title, story_url: response_content_link_to_story, publication_timestamp: response_content_raw_intialpubdatetime_converted_to_date, parsed_question: parsed_dl_question, parsed_answer: parsed_dl_answer)
+        Column.create!(unparsed_html_body: clean_raw_html, headline: response_content_title, story_url: response_content_link_to_story, publication_timestamp: response_content_raw_intialpubdatetime_converted_to_date, parsed_question: parsed_dl_question, parsed_answer: parsed_dl_answer)
+      end
 
     end
 
