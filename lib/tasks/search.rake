@@ -5,23 +5,30 @@ namespace :search do
 
     # IMPORTANT
     # !!Use this only if you want to wipe all the information in the database!!
-    # Column.delete_all
+    Column.delete_all
 
     ## TO USE
     # Adjust the dates on the search_curl as needed (LINE 18)
     # Swap the separator between the question and answer between a series of fullstops and a series of dashes, as needed. Generally, dashes have been used more recently and fullstops before that. Also a random selection of columns at various points have no separation at all and so these don't make it into the database. JOY! (LINE 46)
     # Don't hate me cause the above two things are variables yet, I'm just so *ucking happy this is working at all right now and I'd like to do some more interesting things. Thank you.
 
+    # 2013-2014 range deletes
+    # Column.find_by headline: "Is doing an executive MBA fair on my family?"
+    # Column.find_by headline: "Am I better off going to a bigger-brand school with more of a reputation?"
+    # Column.find_by headline: "Lucy Kellaway on 360-degree feedback"
+    # Column.find_by headline: "Dear Lucy: data crunchers and dating dilemmas"
+
     eds_key = ENV['FT_EDS_API_KEY']
     max_search_results = 100
 
-    search_curl = %Q(curl -X POST --header "Content-Type:application/json" http://api.ft.com/content/search/v1\?apiKey\=#{eds_key} -d '{"queryString":"brand:=\\\"Dear Lucy\\\" AND initialPublishDateTime:>2011-01-01T00:00:00Z AND initialPublishDateTime:<2013-01-01T00:00:00Z", "resultContext" : { "maxResults": #{max_search_results},"offset": 0 } }')
+    search_curl = %Q(curl -X POST --header "Content-Type:application/json" http://api.ft.com/content/search/v1\?apiKey\=#{eds_key} -d '{"queryString":"brand:=\\\"Dear Lucy\\\" AND initialPublishDateTime:>2013-01-01T00:00:00Z AND initialPublishDateTime:<2015-01-01T00:00:00Z", "resultContext" : { "maxResults": #{max_search_results},"offset": 0 } }')
 
     raw_json_response = `#{search_curl}`
 
     apiUrls = JSON.parse(raw_json_response)["results"].flat_map { |sapi_result| sapi_result["results"].map { |search_result| search_result["apiUrl"] } }
     
     # It appears that sometimes the SAPI returns nil (or at least it does when the result is parsed in this way). Would be worth investigating.
+    # http://api.ft.com/content/items/v1/09e5832a-7b60-11e0-ae56-00144feabdc0
     apiUrls.compact!
 
     puts apiUrls
@@ -43,7 +50,7 @@ namespace :search do
 
       ## This is where the splitter is. I should put it in a variable at the top really.
       split_paragraph_index = all_paragraphs_from_bodycopy.to_a.index { |paragraph| 
-        paragraph.to_s =~ %r{\<p\>......................} 
+        paragraph.to_s =~ %r{\<p\>-----------} 
       }
 
       # This unless statement is here to catch the awful cases where the split_paragraph_index is nil because there is no bloody separator. Dammit.

@@ -9,7 +9,7 @@ class ColumnsController < ApplicationController
   end
 
   def index
-
+    @columns = Column.all.order(publication_timestamp: :desc)
   end
 
   private

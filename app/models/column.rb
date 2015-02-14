@@ -4,4 +4,6 @@ class Column < ActiveRecord::Base
 
   accepts_nested_attributes_for :categorizers, allow_destroy: true
 
+  
+
 end
