@@ -15,6 +15,7 @@ gem 'json'
 
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'cancancan'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
