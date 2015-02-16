@@ -1,5 +1,19 @@
-<h1>Edit category</h1>
-<%= form_for @category do |category| %>
-  <%= render partial: 'form', locals: { category: category }%>
-  <%= category.submit 'Save changes' %>
+<h1>Add/remove categories</h1>
+<%= form_for @column do |column| %>
+  <%= column.label :primary_category_id, 'Primary category' %>
+  <%= column.collection_select :primary_category_id, @primary_categories.order(category_name: :asc), :id, :category_name %>
+  <br><br>
+  <div class="checkbox-list">
+    <%= column.collection_check_boxes :category_ids, Category.all.order(category_name: :asc), :id, :category_name, {:item_wrapper_class => 'checkbox_container'} %>
+  </div>
+  <br><br>
+  <%= column.submit 'Save changes' %>
 <% end %>
+<br><br>
+
+
+<h3><%= @column.headline %></h3>
+<%= @column.parsed_question.html_safe %>
+<p>Originally published on <%= @column.publication_timestamp.strftime("%b %-d, %Y") %></p>
+<strong>END QUESTION</strong>
+<%= @column.parsed_answer.html_safe %>

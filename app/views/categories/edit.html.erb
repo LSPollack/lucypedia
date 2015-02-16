@@ -1,13 +1,6 @@
 <h1>Add/remove categories</h1>
-<%= form_for @column do |category| %>
-  <%= f.label :category_id, 'Category' %>
-  <%= f.collection_select(:category_id, Category.all, :id, :category_name, prompt: true) %>
-  <br><br>
+<%= form_for @category do |category| %>
+  <%= render partial: 'form', locals: { category: category } %>
   <%= category.submit 'Save changes' %>
 <% end %>
 
-<%= column.headline %></h3>
-<%= column.parsed_question.html_safe %>
-<p>Originally published on <%= column.publication_timestamp.strftime("%b %-d, %Y") %></p>
-<strong>END QUESTION</strong>
-<%= column.parsed_answer.html_safe %>

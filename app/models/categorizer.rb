@@ -1,4 +1,4 @@
 class Categorizer < ActiveRecord::Base
-  belongs_to :columns
-  belongs_to :categories
+  belongs_to :column
+  belongs_to :category
 end

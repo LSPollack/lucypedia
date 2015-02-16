@@ -1,6 +1,23 @@
 <h3><%= @column.headline %></h3>
+<p>Primary category: 
+  <%= @column.primary_category.try :category_name %>
+</p>
+
+<p>Other categories:
+  <ol>
+    <% @column.categorizers.each do |categorizer| %>
+      <li><%= categorizer.category.try(:category_name) %></li>
+    <% end %>
+  </ol>
+</p>
+<% if can? :update, @column %>
+<br><br>
+  <%= link_to 'Edit column categories', edit_column_path(@column) %>
+<% end %>
+<br><br>
 <%= @column.parsed_question.html_safe %>
 <p>Originally published on <%= @column.publication_timestamp.strftime("%b %-d, %Y") %></p>
 <strong>END QUESTION</strong>
 <%= @column.parsed_answer.html_safe %>
 <strong>END ANSWER</strong>
+

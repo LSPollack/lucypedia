@@ -1,7 +1,7 @@
 class ColumnsController < ApplicationController
   load_and_authorize_resource
+  before_action :set_primary_categories, only: [:edit, :update]
 
-  
 
   def index
     @columns = Column.all.order(publication_timestamp: :desc)
@@ -14,6 +14,10 @@ class ColumnsController < ApplicationController
 
   private
     def column_params
-      params.require(:column).permit({categorizer_attributes: [ :column_id, :category_id, :id, :_destroy ] })
+      params.require(:column).permit(:primary_category_id, {category_ids: [] })
+    end
+
+    def set_primary_categories
+      @primary_categories = Category.where(is_primary: true)
     end
 end
