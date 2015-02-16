@@ -9,7 +9,7 @@ class ColumnsController < ApplicationController
 
   def update
     @column.update(column_params)
-    redirect_to(column_path)
+    redirect_to(columns_path)
   end
 
   private

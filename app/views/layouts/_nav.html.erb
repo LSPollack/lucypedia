@@ -1,5 +1,5 @@
 <% if can? :manage, :all %>
-  <nav>
+  <div class="admin-panel-wrapper">
     <ul>
       <li>
         <%= link_to 'Dear Lucy Index', columns_path %>
@@ -8,5 +8,44 @@
         <%= link_to 'Manage categories', categories_path %>
       </li>
     </ul>
-  </nav>
+  </div>
 <% end %>
+
+<header data-o-component="o-ft-header" class="o-ft-header o-registry-demo-chunk">
+  <div class="o-ft-header__container">
+    <div class="o-ft-header__primary">
+      <div class="o-ft-header__primary__left">
+  <div class="o-ft-header__logo o-ft-header__logo--ft">
+    <a href="http://www.ft.com"><abbr title="Financial Times">FT</abbr></a>
+  </div>
+              <h1 class="o-ft-header__ft-masthead">Lucypedia</h1>
+</div>
+
+<nav class="o-ft-header__primary__center o-hierarchical-nav o-ft-header__nav--primary-theme" data-o-component="o-hierarchical-nav" data-o-version="0.2.8">
+  <ul data-o-hierarchical-nav-level="1">
+    <li data-priority="3"><a><div>About Lucy</div></a></li>
+    <li data-priority="3"><div class='login'>
+      <% if current_user %>
+        <%= current_user.email %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%#= link_to "Sign In", new_user_session_path %>
+        <%#= link_to "Register", new_user_registration_path %>
+        <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+      <% end %>
+    </div></li>
+    <li data-more="" class="o-hierarchical-nav__parent" aria-hidden="true"><a><span class="o-hierarchical-nav__more--if-some">More <i class="o-hierarchical-nav__parent__down-arrow"></i></span><span class="o-hierarchical-nav__more--if-all">Menu <i class="o-hierarchical-nav__parent__down-arrow"></i></span></a></li>
+  </ul>
+</nav>
+          
+    </div>
+    <div class="o-ft-header__secondary">
+      <div class="o-ft-header__secondary__left">
+  <h2 class="o-ft-header__tagline"></h2>
+</div>
+<div class="o-ft-header__secondary__right">
+</div>
+
+    </div>
+  </div>
+</header>
