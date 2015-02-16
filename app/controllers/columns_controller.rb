@@ -1,6 +1,7 @@
 class ColumnsController < ApplicationController
   load_and_authorize_resource
 
+  
 
   def index
     @columns = Column.all.order(publication_timestamp: :desc)

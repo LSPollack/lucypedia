@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :columns
-  resources :colors
   resources :categories
 
   root to: "columns#index"

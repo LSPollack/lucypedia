@@ -1,0 +1,5 @@
+<h1>Edit category</h1>
+<%= form_for @category do |category| %>
+  <%= render partial: 'form', locals: { category: category }%>
+  <%= category.submit 'Save changes' %>
+<% end %>
