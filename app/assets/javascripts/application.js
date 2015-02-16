@@ -11,6 +11,20 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+
+$('.lucys-answer').hide(); 
+
+ $('.lucy-answer-button').click(function() {
+
+  // $(this).next().toggle();
+  $(this).parent().next().toggle();
+
+  });
+
+});

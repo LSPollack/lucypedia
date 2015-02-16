@@ -38,7 +38,7 @@ body {
 
 .lucypedia-page-header p {
   line-height: 35px;
-  margin: 0;
+  margin: 0 0 40px 0;
   padding-left: 5px;
   font-size: 16px;
   border-bottom: dotted 1px #a7a59b;
@@ -58,16 +58,23 @@ p#lucypedia-intro-blurb {
   border-radius: 5%;
 }
 
-
 .dear-lucy-headline {
   font-family: Arial;
   font-size: 16px;
 }
 
-.publication-timestamp {
-  font-size: 12px;
+.column-question-footer {
   border-top: dotted 1px #a7a59b;
+  margin-bottom: 60px;
 }
+
+.lucy-answer-button {
+  margin-right: 75%;
+}
+
+
+
+
 
 /* PRIMARY TAG COLOURS */
 
