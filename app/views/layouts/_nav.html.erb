@@ -1,0 +1,12 @@
+<% if can? :manage, :all %>
+  <nav>
+    <ul>
+      <li>
+        <%= link_to 'Dear Lucy Index', columns_path %>
+      </li>
+      <li>
+        <%= link_to 'Manage categories', categories_path %>
+      </li>
+    </ul>
+  </nav>
+<% end %>

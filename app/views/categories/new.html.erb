@@ -1,2 +1,5 @@
-<h1>Categories#new</h1>
-<p>Find me in app/views/categories/new.html.erb</p>
+<h1>Add a new category</h1>
+<%= form_for @category do |category| %>
+  <%= render partial: 'form', locals: { category: category } %>
+  <%= category.submit 'Create category' %>
+<% end %>

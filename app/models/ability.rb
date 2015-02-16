@@ -8,9 +8,9 @@ class Ability
     if user.role? :admin
         can :manage, :all
     elsif user.persisted?
-        # can :read, Column
+        can :read, Column
     else
-        # can :read, Column
+        can :read, Column
     end
 
     # The first argument to `can` is the action you are giving the user

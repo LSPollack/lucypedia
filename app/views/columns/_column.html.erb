@@ -6,5 +6,11 @@
 <strong>END ANSWER</strong>
 
 <%= link_to 'View on FT.com', column.story_url %>
+
+<% if can? :update, @column %>
+<br><br>
+  <%= link_to 'Edit column categories', column %>
+<% end %>
+
 <p>--END COLUMN--</p>
 <br><br>
