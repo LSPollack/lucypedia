@@ -55,18 +55,61 @@ p#lucypedia-intro-blurb {
   margin-right: 10px;
   border: 1px solid #e9decf;
   background-color: #f6e9d8;
-  border-radius: 10%;
+  border-radius: 5%;
 }
 
-span.section-light-green {
-  color: #09a25c;
-}
 
 .dear-lucy-headline {
   font-family: Arial;
   font-size: 16px;
 }
 
+.publication-timestamp {
+  font-size: 12px;
+  border-top: dotted 1px #a7a59b;
+}
+
+/* PRIMARY TAG COLOURS */
+
+span.dark-blue {
+  color: #275e86;
+}
+
+span.orange {
+  color: #d66d06;
+}
+
+span.grey-tint3 {
+  color: #777777;
+}
+
+span.green-tint1 {
+  color: #a6a471;
+}
+
+span.bluegreen-tint1 {
+  color: #819e9a;
+}
+
+span.purple-tint1 {
+  color: #936971;
+}
+
+span.red-tint1 {
+  color: #b1493f;
+}
+
+span.blue-tint2 {
+  color: #75a5c2;
+}
+
+span.section-purple {
+  color: #92288f;
+}
+
+span.section-blue {
+  color: #0e6dcc;
+}
 
 /*STYLES FOR ADMIN USER ONLY*/
 
