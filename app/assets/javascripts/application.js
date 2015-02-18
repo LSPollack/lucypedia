@@ -22,8 +22,29 @@ $(document).ready(function() {
   $('.lucys-answer').hide(); 
 
   $('.columns-container').click('.lucy-answer-button', function(el) {
-    $(el.target).parent().next().toggle();
-  });
+
+      $(el.target).parent().next('.lucys-answer').toggle();
+
+      if ($(el.target).parent().next('.lucys-answer:visible').length) {
+
+        $(el.target).children("i").removeClass("o-ft-icons-icon--arrow-right");
+
+        $(el.target).children("i").addClass("o-ft-icons-icon--arrow-down");
+      }
+
+      else {
+        $(el.target).children("i").addClass("o-ft-icons-icon--arrow-right");
+        $(el.target).children("i").removeClass("o-ft-icons-icon--arrow-down");
+      }
+
+    });
+      
+  // $('.columns-container').click('.lucy-answer-button', function(el) {
+  //   $(el.target).parent().next().toggle();
+  //     // toggle between two function
+  //   });
+
+
 
   // Ajax for filtering by category
   $('.category-filter-form').

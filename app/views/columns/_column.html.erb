@@ -1,11 +1,11 @@
 <h3 class="dear-lucy-headline">
   <% if column.primary_category %>
 
-    <span class="<%= column.primary_category.try :color %> primary-tag">
+    <span>
       <%= form_tag columns_path, method: :get, remote: true, class: "category-filter-form" do %>
           <%# send the category_name somehow %>
           <%= hidden_field_tag :primary_category_id, column.primary_category.id %>
-          <%= submit_tag column.primary_category.try(:category_name) %>
+          <%= submit_tag column.primary_category.try(:category_name), :class => "#{column.primary_category.try :color} primary-tag" %>
       <% end %>
     </span>
 
@@ -18,7 +18,9 @@
 <%= column.parsed_question.html_safe %>
 
 <p class="column-question-footer">
-  <a class="lucy-answer-button">► Show answer</a>
+  <a class="lucy-answer-button">
+    <i class="o-ft-icons-icon o-ft-icons-icon--arrow-right demo-icon">
+    </i> Show answer</a>
   <span class="publication-timestamp">
   <%= column.publication_timestamp.strftime("%b %-d, %Y") %>
   </span>
