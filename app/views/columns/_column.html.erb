@@ -1,22 +1,38 @@
-<h3 class="dear-lucy-headline"><span class="<%= column.primary_category.try :color %> primary-tag"><%= column.primary_category.try :category_name %></span><%= column.headline %></h3>
+<h3 class="dear-lucy-headline">
+  <% if column.primary_category %>
+
+    <span class="<%= column.primary_category.try :color %> primary-tag">
+      <%= form_tag columns_path, method: :get, remote: true, class: "category-filter-form" do %>
+          <%# send the category_name somehow %>
+          <%= hidden_field_tag :primary_category_id, column.primary_category.id %>
+          <%= submit_tag column.primary_category.try(:category_name) %>
+      <% end %>
+    </span>
+
+  <% end %>
+  <%= column.headline %>
+</h3>
+
+
 
 <%= column.parsed_question.html_safe %>
 
 <p class="column-question-footer">
-  <a class="lucy-answer-button">Show Lucy's answer</a>
+  <a class="lucy-answer-button">► Show answer</a>
   <span class="publication-timestamp">
   <%= column.publication_timestamp.strftime("%b %-d, %Y") %>
   </span>
 </p>
 
 <div class="lucys-answer">
-  <%= column.parsed_answer.html_safe %><br><br>
+  <%= column.parsed_answer.html_safe %>
   <ol>
     <% column.categorizers.each do |categorizer| %>
       <li><%= categorizer.category.try(:category_name) %></li>
     <% end %>
   </ol>
-  <%= link_to 'View on FT.com', column.story_url %>
+
+  <%= link_to 'View on FT.com', column.story_url %><br><br>
 </div>
 
 <% if can? :update, @column %>

@@ -1,0 +1,7 @@
+<div class="lucypedia-page-header">
+    <p id="indignant-origami-font-override-1">Lucy Kellaway on <%= @category.category_name.downcase %></p>   
+</div>
+
+<% Column.where(primary_category_id: @category.id).each do |column| %>
+  <%= render :partial => "columns/column", locals: { column: column } %>
+<% end %>

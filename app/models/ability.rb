@@ -10,9 +10,11 @@ class Ability
     elsif user.persisted?
         # logged in users who aren't admins
         can :read, Column
+        can :read, Category
     else
         # non-logged in users
         can :index, Column
+        can :read, Category
     end
 
     # The first argument to `can` is the action you are giving the user

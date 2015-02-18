@@ -4,7 +4,14 @@ class ColumnsController < ApplicationController
 
 
   def index
-    @columns = Column.all.order(publication_timestamp: :desc)
+    # if there is a primary category in the params hash then run this query to filter by the columns with that category.
+    if params[:primary_category_id]
+      @columns = Column.where(primary_category_id: params[:primary_category_id]).order(publication_timestamp: :desc)
+    else
+      @columns = Column.all.order(publication_timestamp: :desc)
+    end
+
+    render @columns, layout: false if request.xhr?
   end
 
   def update

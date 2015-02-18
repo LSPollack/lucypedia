@@ -18,13 +18,22 @@
 
 $(document).ready(function() {
 
-$('.lucys-answer').hide(); 
+  // Show/hide Lucy answer
+  $('.lucys-answer').hide(); 
 
- $('.lucy-answer-button').click(function() {
-
-  // $(this).next().toggle();
-  $(this).parent().next().toggle();
-
+  $('.columns-container').click('.lucy-answer-button', function(el) {
+    $(el.target).parent().next().toggle();
   });
+
+  // Ajax for filtering by category
+  $('.category-filter-form').
+    on('ajax:success', function(evt, data, status, xhr){
+      $('.columns-container').html(data);
+      $('.lucys-answer').hide(); 
+
+    }).
+    on('ajax:error', function(xhr, status, error){
+      console.log('error: ', error);
+    });
 
 });

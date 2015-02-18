@@ -25,7 +25,6 @@ body {
   margin: 1.5em;
   max-width: 900px;
   min-width: 250px;
-  /*clear: both;*/
 }
 
 .lucypedia-page-header {
@@ -44,18 +43,24 @@ body {
   border-bottom: dotted 1px #a7a59b;
 }
 
-p#lucypedia-intro-blurb {
+p#indignant-origami-font-override-1,
+p#indignant-origami-font-override-2 {
   font-weight: bold;
   font-family: Arial;
   font-size: 18px;
 }
 
-.primary-tag {
+.primary-tag a {
   padding: 5px;
   margin-right: 10px;
   border: 1px solid #e9decf;
   background-color: #f6e9d8;
   border-radius: 5%;
+  text-decoration: none;
+}
+
+.primary-tag a:hover {
+  background-color: #cec6b9;
 }
 
 .dear-lucy-headline {
@@ -69,64 +74,67 @@ p#lucypedia-intro-blurb {
 }
 
 .lucy-answer-button {
-  margin-right: 75%;
+  padding: 2px;
+  color: #2e6e9e;
+  font-weight: bold;
+
 }
 
+.publication-timestamp {
+  float: right;
+  font-size: 12px;
+}
 
+.lucys-answer {
+  margin-top: -40px;
+}
 
 
 
 /* PRIMARY TAG COLOURS */
 
-span.dark-blue {
+span.dark-blue a {
   color: #275e86;
 }
 
-span.orange {
+span.orange a {
   color: #d66d06;
 }
 
-span.grey-tint3 {
+span.grey-tint3 a {
   color: #777777;
 }
 
-span.green-tint1 {
+span.green-tint1 a {
   color: #a6a471;
 }
 
-span.bluegreen-tint1 {
+span.bluegreen-tint1 a {
   color: #819e9a;
 }
 
-span.purple-tint1 {
+span.purple-tint1 a {
   color: #936971;
 }
 
-span.red-tint1 {
+span.red-tint1 a {
   color: #b1493f;
 }
 
-span.blue-tint2 {
+span.blue-tint2 a {
   color: #75a5c2;
 }
 
-span.section-purple {
+span.section-purple a {
   color: #92288f;
 }
 
-span.section-blue {
+span.section-blue a {
   color: #0e6dcc;
 }
 
 /*STYLES FOR ADMIN USER ONLY*/
 
  .checkbox-list input[type="checkbox"] {
-   display: inline-block;
-   width: 10%;
- }
-
- .checkbox-list input[type="checkbox"] + label {
-   display: inline-block;
-   margin-left: -5px;
-   width: 80%;
+   display: block;
  }
