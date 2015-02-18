@@ -23,7 +23,7 @@
 
 <nav class="o-ft-header__primary__center o-hierarchical-nav o-ft-header__nav--primary-theme" data-o-component="o-hierarchical-nav" data-o-version="0.2.8">
   <ul data-o-hierarchical-nav-level="1">
-    <li data-priority="3"><a><div>About Lucy</div></a></li>
+    <li data-priority="3"><%= link_to 'Home', columns_path %></li>
     <li data-priority="3"><div class='login'>
       <% if current_user %>
         <%= current_user.email %>

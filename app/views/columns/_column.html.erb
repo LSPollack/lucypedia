@@ -28,11 +28,11 @@
 
 <div class="lucys-answer">
   <%= column.parsed_answer.html_safe %>
-  <ol>
-    <% column.categorizers.each do |categorizer| %>
-      <li><%= categorizer.category.try(:category_name) %></li>
-    <% end %>
-  </ol>
+  <!-- <ol>
+    <%# column.categorizers.each do |categorizer| %>
+      <li><%#= categorizer.category.try(:category_name) %></li>
+    <%# end %>
+  </ol> -->
 
   <%= link_to 'View on FT.com', column.story_url %><br><br>
 </div>

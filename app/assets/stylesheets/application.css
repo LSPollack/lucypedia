@@ -82,6 +82,7 @@ input.primary-tag input:hover {
   padding: 2px;
   color: #2e6e9e;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .publication-timestamp {
